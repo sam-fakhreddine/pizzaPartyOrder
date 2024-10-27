@@ -1,0 +1,165 @@
+:root {
+  --background-color: #f8f9fa;
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --font-color: #333;
+  --input-border-color: #ddd;
+  --box-shadow-color: rgba(0, 0, 0, 0.15);
+  --border-radius: 8px;
+  --container-width: 1080px;
+  --padding: 20px;
+  --input-padding: 12px;
+  --light-grey-background: rgba(211, 211, 211, 0.676); /* Light grey with 50% opacity */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  background-image: url("../images/background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--font-color);
+  margin: 0;
+  padding: var(--padding);
+  overflow: hidden; /* Prevents scrolling */
+  height: 900px; /* Locks the page height */
+}
+
+h1, h2 {
+  text-align: center;
+  color: var(--font-color);
+  margin-bottom: 20px;
+}
+
+#container {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  gap: 20px;
+  height: 780px; /* Fits content within a 1080 x 900 window, accounting for header/footer */
+}
+
+#order-summary, #order-form-section, #recent-orders {
+  background-color: var(--light-grey-background);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  flex: 1;
+  min-width: 250px;
+}
+
+#order-summary, #recent-orders {
+  flex-basis: 30%;
+}
+
+#order-form-section {
+  flex-basis: 40%;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea {
+  width: 100%;
+  padding: var(--input-padding);
+  margin-bottom: 15px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+input[type="number"] {
+  width: 100%;
+  max-width: 60px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--input-border-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--input-padding);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.order {
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.error {
+  color: red;
+}
+
+.pizza-slices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for a more balanced layout */
+  gap: 15px;
+}
+
+.pizza-slice-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pizza-slice-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+fieldset {
+  background-color: rgba(255, 255, 255, 0.8); /* Light, semi-transparent background */
+  padding: 15px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  color: #555;
+}
+
+/* Styling for the last orders section */
+#lastOrders {
+  margin-top: 20px;
+}
+
+.pizza-slice-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.summary {
+  margin-bottom: 10px;
+}

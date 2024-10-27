@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Party Orders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <main id="container">
+        <!-- Order totals and pizza summary on the left -->
+        <section id="order-summary" aria-labelledby="order-summary-title">
+            <h2 id="order-summary-title">Order Totals</h2>
+            <div id="orderSummary">
+                <!-- Dynamic content loaded by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Main order form in the center -->
+        <section id="order-form-section" aria-labelledby="order-form-title">
+            <h2 id="order-form-title">Select Pizza Party Date</h2>
+            <label for="pizzaPartyDate">Pizza Party Date:</label>
+            <input type="date" id="pizzaPartyDate" required aria-describedby="dateError" />
+            <p id="dateError" class="error" aria-live="assertive"></p>
+
+            <form id="orderForm" aria-labelledby="order-form-title">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" placeholder="Student Name" required />
+
+                <label for="classroom">Classroom # (Optional):</label>
+                <input type="text" id="classroom" placeholder="Classroom #" />
+
+                <fieldset>
+                   
+                    <div class="pizza-slices">
+                        <div class="pizza-slice-group">
+                            <label for="zaatar">Zaatar</label>
+                            <input type="number" id="zaatar" min="0" value="0" />
+                        </div>
+                        <div class="pizza-slice-group">
+                            <label for="cheese">Cheese</label>
+                            <input type="number" id="cheese" min="0" value="0" />
+                        </div>
+                        <div class="pizza-slice-group">
+                            <label for="salami">Salami</label>
+                            <input type="number" id="salami" min="0" value="0" />
+                        </div>
+                        <div class="pizza-slice-group">
+                            <label for="veggie">Veggie</label>
+                            <input type="number" id="veggie" min="0" value="0" />
+                        </div>
+                        <div class="pizza-slice-group">
+                            <label for="donair">Donair</label>
+                            <input type="number" id="donair" min="0" value="0" />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <label for="juiceBoxes">Juice Boxes:</label>
+                <input type="number" id="juiceBoxes" min="0" value="0" />
+
+                <label for="parentVolunteer">Parent Volunteer (Optional):</label>
+                <input type="text" id="parentVolunteer" placeholder="Parent Volunteer" />
+
+                <button type="submit">Submit Order</button>
+                <p id="errorMessage" class="error" aria-live="assertive"></p>
+            </form>
+        </section>
+
+        <!-- Recent orders on the right -->
+        <section id="recent-orders" aria-labelledby="recent-orders-title">
+            <h2 id="recent-orders-title">Your Last 5 Orders</h2>
+            <div id="lastOrders">
+                <!-- Dynamic content loaded by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pizza Party Order System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
