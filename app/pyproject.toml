@@ -10,6 +10,7 @@ python = "^3.12"
 flask = "^3.0.3"
 flask-cors = "^5.0.0"
 flask-pymongo = "^2.3.0"
+jsonify = "^0.5"
 
 
 [build-system]

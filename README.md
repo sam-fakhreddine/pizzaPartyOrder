@@ -109,5 +109,6 @@ The application is configured to store logs in JSON format, with a maximum log f
 ## Customization
 
 Feel free to adjust:
+
 - The `docker-compose.yml` for different port mappings or resources.
 - The CSS styles to fit your branding.

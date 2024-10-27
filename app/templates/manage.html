@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders and Menu</title>
+    <script src="{{ url_for('static', filename='js/manager.js') }}"></script>
+</head>
+<body>
+    <h1>Manager Dashboard</h1>
+    <section id="order-section">
+        <h2>Orders</h2>
+        <div id="orders"></div>
+    </section>
+    <section id="menu-section">
+        <h2>Add Menu Item</h2>
+        <form id="menuForm">
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" required>
+            <label for="itemType">Item Type:</label>
+            <input type="text" id="itemType" required>
+            <button type="submit">Add Item</button>
+        </form>
+        <p id="menuMessage"></p>
+    </section>
+    <a href="/logout">Logout</a>
+</body>
+</html>
