@@ -1,0 +1,39 @@
+services:
+  evansdale_pizza:
+    container_name: evansdale_pizza_app
+    build:
+      context: ./app 
+      cache_from:
+        - myregistry/evansdale_pizza:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app/orders:/app/orders  # Updated path if needed
+    environment:
+      - FLASK_ENV=${FLASK_ENV:-production}  # Default to production if FLASK_ENV is not set in .env file
+    restart: unless-stopped  # Restart unless manually stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"      # Maximum size per log file
+        max-file: "3"        # Number of rotated log files to keep
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"          # Limit CPU to half a core
+          memory: "512M"       # Limit memory to 512 MB
+    networks:
+      - evansdale_net
+
+volumes:
+  app_data:  # Define named volume for persistent storage
+
+networks:
+  evansdale_net:
+    driver: bridge  # Custom network for service isolation
