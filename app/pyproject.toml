@@ -2,13 +2,14 @@
 name = "pizzapartyweb"
 version = "0.1.0"
 description = ""
-authors = ["Sam Fakhreddine <sam.fakhreddine@rackspace.com>"]
+authors = ["Sam Fakhreddine <sam.fakhreddine@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 flask = "^3.0.3"
 flask-cors = "^5.0.0"
+flask-pymongo = "^2.3.0"
 
 
 [build-system]

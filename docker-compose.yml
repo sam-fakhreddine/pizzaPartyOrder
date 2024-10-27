@@ -3,8 +3,6 @@ services:
     container_name: evansdale_pizza_app
     build:
       context: ./app 
-      cache_from:
-        - myregistry/evansdale_pizza:latest
     ports:
       - "5000:5000"
     volumes:
@@ -29,10 +27,21 @@ services:
           cpus: "0.5"          # Limit CPU to half a core
           memory: "512M"       # Limit memory to 512 MB
     networks:
-      - evansdale_net
+      - evansdale_net  # Shared internal network with MongoDB
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongo_data:/data/db  # Persistent volume for MongoDB data
+    environment:
+      - MONGO_INITDB_DATABASE=evansdale_pizza  # Optional: Initialize with a default database
+    networks:
+      - evansdale_net  # Only accessible within this internal network
 
 volumes:
-  app_data:  # Define named volume for persistent storage
+  app_data:  # Define named volume for app persistent storage
+  mongo_data:  # Define named volume for MongoDB persistent storage
 
 networks:
   evansdale_net:
