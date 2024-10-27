@@ -11,7 +11,7 @@ services:
       - FLASK_ENV=${FLASK_ENV:-production}  # Default to production if FLASK_ENV is not set in .env file
     restart: unless-stopped  # Restart unless manually stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:7100/health"]
       interval: 30s
       timeout: 10s
       retries: 5
