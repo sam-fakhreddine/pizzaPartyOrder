@@ -1,9 +1,16 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
+
 WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
+
+# Install curl and apply security updates
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN pip install poetry
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi 
+
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 USER appuser
 COPY . /app
