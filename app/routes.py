@@ -1,4 +1,11 @@
-from flask import Blueprint, jsonify, request, make_response, render_template, send_from_directory
+from flask import (
+    Blueprint,
+    jsonify,
+    request,
+    make_response,
+    render_template,
+    send_from_directory,
+)
 
 from services.order_service import save_order, backup_order_to_json
 from utils.helpers import serialize_mongo_doc, calculate_totals, calculate_pizzas_needed
@@ -6,6 +13,7 @@ from db import mongo
 from config import Config
 from datetime import datetime
 import os
+
 bp = Blueprint("routes", __name__)
 
 
@@ -13,11 +21,15 @@ bp = Blueprint("routes", __name__)
 def index():
     return render_template("index.html")
 
+
 @bp.route("/favicon.ico")
 def favicon():
     return send_from_directory(
-        os.path.join(bp.root_path, "static"), "favicon.ico", mimetype="image/vnd.microsoft.icon"
+        os.path.join(bp.root_path, "static"),
+        "favicon.ico",
+        mimetype="image/vnd.microsoft.icon",
     )
+
 
 @bp.route("/orders", methods=["POST"])
 def submit_order():
@@ -54,6 +66,7 @@ def submit_order():
     except Exception as e:
         return jsonify({"error": f"Error saving order: {str(e)}"}), 500
 
+
 @bp.route("/orders", methods=["GET"])
 def get_orders():
     """Retrieve orders for a specific date."""
@@ -88,7 +101,6 @@ def get_orders():
     except Exception as e:
         app.logger.error(f"Error retrieving orders: {str(e)}")
         return jsonify({"error": f"Error retrieving orders: {str(e)}"}), 500
-
 
 
 @bp.route("/health")

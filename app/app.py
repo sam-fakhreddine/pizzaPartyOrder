@@ -6,7 +6,7 @@ from config import Config
 import routes
 
 app = Flask(__name__)
-app.config.from_object(Config)  
+app.config.from_object(Config)
 CORS(app, supports_credentials=True)
 
 app.json_encoder = MongoJSONEncoder

@@ -1,10 +1,11 @@
 import os
 from uuid import uuid4
 from datetime import datetime
-from bson import ObjectId  
+from bson import ObjectId
 from config import Config
 
 PIZZA_TYPES = ["Cheese", "Salami", "Veggie", "Donair", "Zaatar"]
+
 
 def serialize_mongo_doc(doc):
     if isinstance(doc, dict):
@@ -17,6 +18,7 @@ def serialize_mongo_doc(doc):
         return doc.isoformat()
     return doc
 
+
 def get_order_file_path(date, user_id):
     order_dir = os.path.join(Config.ORDERS_DIR, date)
     if not os.path.exists(order_dir):
@@ -24,10 +26,12 @@ def get_order_file_path(date, user_id):
     unique_filename = f"{user_id}_{uuid4()}.json"
     return os.path.join(order_dir, unique_filename)
 
+
 # helpers.py
 from config import Config
 
 PIZZA_TYPES = ["Cheese", "Salami", "Veggie", "Donair", "Zaatar"]
+
 
 def calculate_totals(data):
     """Calculate the total number of pizza slices and juice boxes."""
@@ -42,6 +46,7 @@ def calculate_totals(data):
         total_juice_boxes += order.get("juice_boxes", 0)
 
     return total_slices, total_juice_boxes
+
 
 def calculate_pizzas_needed(pizza_slices, buffer_percentage=0.1):
     """Calculate the number of whole pizzas needed based on the slices, with a buffer."""

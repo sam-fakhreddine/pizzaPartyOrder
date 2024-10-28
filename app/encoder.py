@@ -2,6 +2,7 @@ from datetime import datetime
 from bson import ObjectId
 from json import JSONEncoder
 
+
 class MongoJSONEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, ObjectId):
