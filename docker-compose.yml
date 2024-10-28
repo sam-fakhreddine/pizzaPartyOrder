@@ -6,37 +6,54 @@ services:
     ports:
       - "7100:5000"
     volumes:
-      - ./app/orders:/app/orders  # Updated path if needed
+      - ./app/orders:/app/orders
     environment:
-      - FLASK_ENV=${FLASK_ENV:-production}  # Default to production if FLASK_ENV is not set in .env file
-    restart: unless-stopped  # Restart unless manually stopped
+      - FLASK_ENV=${FLASK_ENV:-production}
+    restart: unless-stopped
     logging:
       driver: "json-file"
       options:
-        max-size: "10m"      # Maximum size per log file
-        max-file: "3"        # Number of rotated log files to keep
+        max-size: "10m"
+        max-file: "3"
     deploy:
       resources:
         limits:
-          cpus: "0.5"          # Limit CPU to half a core
-          memory: "512M"       # Limit memory to 512 MB
+          cpus: "0.5"
+          memory: "512M"
     networks:
-      - evansdale_net  # Shared internal network with MongoDB
+      - evansdale_net
 
   mongodb:
     image: mongo:latest
     container_name: mongodb
     volumes:
-      - mongo_data:/data/db  # Persistent volume for MongoDB data
+      - mongo_data:/data/db
     environment:
-      - MONGO_INITDB_DATABASE=evansdale_pizza  # Optional: Initialize with a default database
+      - MONGO_INITDB_DATABASE=evansdale_pizza
     networks:
-      - evansdale_net  # Only accessible within this internal network
+      - evansdale_net
+
+  mongo_express:
+    image: mongo-express:latest
+    container_name: mongo_express_gui
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=${ME_CONFIG_BASICAUTH_USERNAME}  # Read from .env
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_CONFIG_BASICAUTH_PASSWORD}
+    env_file:
+      - stack.env
+    ports:
+      - "7101:8081"
+    depends_on:
+      - mongodb
+    networks:
+      - evansdale_net
 
 volumes:
-  app_data:  # Define named volume for app persistent storage
-  mongo_data:  # Define named volume for MongoDB persistent storage
+  app_data:
+  mongo_data:
 
 networks:
   evansdale_net:
-    driver: bridge  # Custom network for service isolation
+    driver: bridge
