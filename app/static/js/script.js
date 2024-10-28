@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedDate = localStorage.getItem('pizzaPartyDate');
     if (savedDate) {
         pizzaPartyDateInput.value = savedDate;
-        fetchOrdersForDate(savedDate, userId);
+        fetchOrdersForDate(savedDate);
     }
 
     // Handle date change and save to localStorage
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         localStorage.setItem('pizzaPartyDate', selectedDate);
         dateError.textContent = '';  // Clear any previous errors
-        fetchOrdersForDate(selectedDate, userId);
+        fetchOrdersForDate(selectedDate);
     });
 
     pizzaPartyDateInput.addEventListener('input', () => {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const dateError = document.getElementById('dateError');
 
 // Fetch and display cumulative totals and user-specific orders for a given date
-async function fetchOrdersForDate(date, userId) {
+async function fetchOrdersForDate(date) {
     try {
         if (!date) {
             dateError.textContent = 'Please select a Pizza Party date.';
@@ -63,7 +63,8 @@ async function fetchOrdersForDate(date, userId) {
         if (!response.ok) {
             const errorData = await response.json();
             console.error('API Error:', errorData);
-            throw new Error('Network response was not ok');
+            dateError.textContent = 'Failed to load orders. Please try again.';
+            return;
         }
 
         const result = await response.json();
@@ -119,13 +120,13 @@ document.getElementById('orderForm').addEventListener('submit', async (event) =>
 
     const selectedDate = document.getElementById('pizzaPartyDate').value;
     const studentName = document.getElementById('studentName').value;
-    const zaatar = parseInt(document.getElementById('zaatar').value, 10);
-    const cheese = parseInt(document.getElementById('cheese').value, 10);
-    const salami = parseInt(document.getElementById('salami').value, 10);
-    const veggie = parseInt(document.getElementById('veggie').value, 10);
-    const donair = parseInt(document.getElementById('donair').value, 10);
-    const juiceBoxes = parseInt(document.getElementById('juiceBoxes').value, 10);
-    const parentVolunteer = document.getElementById('parentVolunteer').value;
+    const zaatar = parseInt(document.getElementById('zaatar').value, 10) || 0;
+    const cheese = parseInt(document.getElementById('cheese').value, 10) || 0;
+    const salami = parseInt(document.getElementById('salami').value, 10) || 0;
+    const veggie = parseInt(document.getElementById('veggie').value, 10) || 0;
+    const donair = parseInt(document.getElementById('donair').value, 10) || 0;
+    const juiceBoxes = parseInt(document.getElementById('juiceBoxes').value, 10) || 0;
+    const parentVolunteer = document.getElementById('parentVolunteer').checked; // Boolean for checkbox
 
     const orderData = {
         user_id: userId,
@@ -138,7 +139,7 @@ document.getElementById('orderForm').addEventListener('submit', async (event) =>
             "Donair": donair
         },
         juice_boxes: juiceBoxes,
-        parent_volunteer: parentVolunteer || ''
+        parent_volunteer: parentVolunteer
     };
 
     try {
@@ -151,7 +152,7 @@ document.getElementById('orderForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             alert('Order submitted successfully!');
-            fetchOrdersForDate(selectedDate, userId); // Refresh orders after submission
+            fetchOrdersForDate(selectedDate); // Refresh orders after submission
         } else {
             alert('Error submitting the order.');
         }

@@ -25,11 +25,9 @@
             <p id="dateError" class="error" aria-live="assertive"></p>
 
             <form id="orderForm" aria-labelledby="order-form-title">
-                <label for="studentName">Student Name:</label>
                 <input type="text" id="studentName" placeholder="Student Name" required />
 
-                <label for="classroom">Classroom # (Optional):</label>
-                <input type="text" id="classroom" placeholder="Classroom #" />
+                <input type="text" id="classroom" placeholder="Classroom # (Optional)" />
 
                 <fieldset>
                    
@@ -54,15 +52,16 @@
                             <label for="donair">Donair</label>
                             <input type="number" id="donair" min="0" value="0" />
                         </div>
+                        <div class="pizza-slice-group">
+                        <label for="juiceBoxes">Juice Boxes:</label>
+                        <input type="number" id="juiceBoxes" min="0" value="0" />
+                    </div>
                     </div>
                 </fieldset>
 
-                <label for="juiceBoxes">Juice Boxes:</label>
-                <input type="number" id="juiceBoxes" min="0" value="0" />
-
-                <label for="parentVolunteer">Parent Volunteer (Optional):</label>
-                <input type="text" id="parentVolunteer" placeholder="Parent Volunteer" />
-
+                <div>
+                <input type="text" id="parentVolunteer" placeholder="Parent Volunteer (Optional)"/>
+                </div>
                 <button type="submit">Submit Order</button>
                 <p id="errorMessage" class="error" aria-live="assertive"></p>
             </form>
