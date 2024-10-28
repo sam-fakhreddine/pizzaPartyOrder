@@ -4,8 +4,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock /app/
 
 # Install curl and apply security updates
-RUN apt-get update && apt-get upgrade -y && apt-get install -y curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
 
 RUN pip install poetry
 RUN poetry config virtualenvs.create false \
