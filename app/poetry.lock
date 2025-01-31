@@ -94,18 +94,18 @@ Flask = ">=0.9"
 
 [[package]]
 name = "flask-pymongo"
-version = "2.3.0"
+version = "3.0.1"
 description = "PyMongo support for Flask applications"
 optional = false
-python-versions = "*"
+python-versions = ">=3.9"
 files = [
-    {file = "Flask-PyMongo-2.3.0.tar.gz", hash = "sha256:620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"},
-    {file = "Flask_PyMongo-2.3.0-py2.py3-none-any.whl", hash = "sha256:8a9577a2c6d00b49f21cb5a5a8d72561730364a2d745551a85349ab02f86fc73"},
+    {file = "flask_pymongo-3.0.1-py3-none-any.whl", hash = "sha256:c75a4a9d7f4dc41ddefcfe75d2a0a259049071d285242c1338c42c64dd1223d9"},
+    {file = "flask_pymongo-3.0.1.tar.gz", hash = "sha256:d225b51c21ceca2e670e6cca79b5c584ad17b96252b48e84e3b423ddb73304cc"},
 ]
 
 [package.dependencies]
-Flask = ">=0.11"
-PyMongo = ">=3.3"
+flask = ">=3.0"
+pymongo = ">=4.0"
 
 [[package]]
 name = "itsdangerous"
@@ -305,4 +305,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "26c89fed7579867a6ef9481803b6faabe703f3119050f03b7332308245e94825"
+content-hash = "32929358d10f8cfeb23985e43ddb14157077fcccb8c5938fd05722813095617a"
